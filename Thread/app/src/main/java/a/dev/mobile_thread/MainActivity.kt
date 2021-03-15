@@ -10,30 +10,48 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
-   val TAG = "MainActivity"
+    val TAG = "MainActivity"
+    var unList = ArrayList<UN>()
+    var unList2 = ArrayList<UN>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
-    var unList = ArrayList<UN>()
+
     fun click(view: View) {
+        when (view.id) {
+            R.id.btnUn -> clickUn()
+            R.id.btnTr -> clickTr()
+        }
 
 
+    }
 
-            val dbInstance = ThreadDB.getThreadDataBase(this)
-            GlobalScope.launch {
-
-
-                unList = ArrayList(dbInstance?.getUNDao()?.loadAll())
-                Log.d(TAG, unList[2].toString())
-            }
+    private fun clickTr() {
 
 
+        val dbInstance = ThreadDB.getThreadDataBase(this)
+        GlobalScope.launch {
+
+        }
+    }
+
+    private fun clickUn() {
+
+        val dbInstance = ThreadDB.getThreadDataBase(this)
+        GlobalScope.launch {
 
 
+            unList = ArrayList(dbInstance?.getUNDao()?.loadAll())
+            unList = ArrayList(dbInstance?.getUNDao()?.load("12"))
 
+            Log.d(TAG, "==============================")
+            Log.d(TAG, unList.toString())
+            Log.d(TAG, "==============================")
+            Log.d(TAG, unList2.toString())
 
-
+        }
 
     }
 
